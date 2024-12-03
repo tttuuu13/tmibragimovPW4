@@ -9,6 +9,9 @@ import Foundation
 import UIKit
 
 final class WishStoringView: UIView {
+    private enum Constants {
+        static let backgroundColor: UIColor = UIColor(white: 0.95, alpha: 1)
+    }
     let tableView: UITableView = UITableView(frame: .zero)
     
     override init(frame: CGRect) {
@@ -22,14 +25,14 @@ final class WishStoringView: UIView {
     }
     
     private func configureUI() {
-        self.backgroundColor = .white
+        self.backgroundColor = Constants.backgroundColor
         configureTable()
     }
     
     private func configureTable() {
         addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = .gray
+        tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
         tableView.layer.cornerRadius = 15
         

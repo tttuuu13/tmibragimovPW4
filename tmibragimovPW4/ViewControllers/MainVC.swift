@@ -8,28 +8,7 @@
 import UIKit
 
 class MainVC: UIViewController {
-    var color: UIColor = Constants.defaultBackgroundColor {
-        didSet {
-            view.backgroundColor = color
-            addWishButton.titleLabel?.textColor = color
-            scheduleWishesButton.titleLabel?.textColor = color
-            UIView.animate(withDuration: 0.3, animations: {
-                if self.color.luminance() < 0.5 {
-                    self.descriptionLabel.textColor = .white
-                    self.titleLabel.textColor = .white
-                    self.addWishButton.backgroundColor = Constants.elementsBackgroundColorWhite
-                    self.scheduleWishesButton.backgroundColor = Constants.elementsBackgroundColorWhite
-                    self.slidersVC.view.backgroundColor = Constants.elementsBackgroundColorWhite
-                } else {
-                    self.descriptionLabel.textColor = .black
-                    self.titleLabel.textColor = .black
-                    self.addWishButton.backgroundColor = Constants.elementsBackgroundColorBlack
-                    self.scheduleWishesButton.backgroundColor = Constants.elementsBackgroundColorBlack
-                    self.slidersVC.view.backgroundColor = Constants.elementsBackgroundColorBlack
-                }
-            })
-        }
-    }
+    var color: UIColor = Constants.defaultBackgroundColor
     private let addWishButton: UIButton = UIButton()
     private let scheduleWishesButton: UIButton = UIButton()
     private let descriptionLabel: UILabel = UILabel()
@@ -38,9 +17,9 @@ class MainVC: UIViewController {
     private let slidersVC: SlidersVC = SlidersVC(color: Constants.defaultBackgroundColor, colorChanged: nil)
     
     enum Constants {
-        static let defaultBackgroundColor: UIColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 0.8)
+        static let defaultBackgroundColor: UIColor = UIColor(red: 0.4, green: 0.3, blue: 0.6, alpha: 0.8)
         static let elementsBackgroundColorWhite: UIColor = .white.withAlphaComponent(0.8)
-        static let elementsBackgroundColorBlack: UIColor = .black.withAlphaComponent(0.2)
+        static let elementsBackgroundColorBlack: UIColor = .black.withAlphaComponent(0.3)
         static let titleFont: UIFont = .systemFont(ofSize: 30, weight: .semibold)
         static let descriptionFont: UIFont = .systemFont(ofSize: 16, weight: .regular)
         static let addButtonTitle: String = "My wishes"
@@ -49,18 +28,17 @@ class MainVC: UIViewController {
         static let componentsOffsetH: CGFloat = 10
         static let componentsOffsetV: CGFloat = 20
         static let stackSpacing: CGFloat = 20
-        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        color = Constants.defaultBackgroundColor
         configureAddWishButton()
         configureScheduleWishesButton()
         configureButtonStack()
         configureSliders()
         configureTitle()
         configureDescription()
+        updateColor(color: color)
     }
     
     private func configureTitle() {
@@ -139,6 +117,24 @@ class MainVC: UIViewController {
     
     private func updateColor(color: UIColor) {
         self.color = color
+        view.backgroundColor = color
+        addWishButton.titleLabel?.textColor = color
+        scheduleWishesButton.titleLabel?.textColor = color
+        UIView.animate(withDuration: 0.3, animations: {
+            if self.color.luminance() < 0.5 {
+                self.descriptionLabel.textColor = .white
+                self.titleLabel.textColor = .white
+                self.addWishButton.backgroundColor = Constants.elementsBackgroundColorWhite
+                self.scheduleWishesButton.backgroundColor = Constants.elementsBackgroundColorWhite
+                self.slidersVC.view.backgroundColor = Constants.elementsBackgroundColorWhite
+            } else {
+                self.descriptionLabel.textColor = .black
+                self.titleLabel.textColor = .black
+                self.addWishButton.backgroundColor = Constants.elementsBackgroundColorBlack
+                self.scheduleWishesButton.backgroundColor = Constants.elementsBackgroundColorBlack
+                self.slidersVC.view.backgroundColor = Constants.elementsBackgroundColorBlack
+            }
+        })
     }
     
     @objc
